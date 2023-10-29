@@ -1,6 +1,6 @@
 package com.mabera.task;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.mabera.employee.Employee;
 
@@ -8,12 +8,12 @@ public class Task {
     private int taskID;
     private String taskDescription;
     private boolean taskDone;
-    private LocalDateTime taskStartedDate;
-    private LocalDateTime taskDueDate;
+    private LocalDate taskStartedDate;
+    private LocalDate taskDueDate;
     
     private Employee assginee;
     
-    public Task(int taskID, String taskDescription, boolean taskDone, LocalDateTime taskStartedDate, Employee assignee,LocalDateTime taskDueDate) {
+    public Task(int taskID, String taskDescription, boolean taskDone, LocalDate taskStartedDate, Employee assignee,LocalDate taskDueDate) {
         this.taskID = taskID;
         this.taskDescription = taskDescription;
         this.taskDone = taskDone;
@@ -41,10 +41,10 @@ public class Task {
     public void setTaskDone(boolean taskDone) {
         this.taskDone = taskDone;
     }
-    public LocalDateTime getTaskStartedDate() {
+    public LocalDate getTaskStartedDate() {
         return taskStartedDate;
     }
-    public void setTaskStartedDate(LocalDateTime taskStartedDate) {
+    public void setTaskStartedDate(LocalDate taskStartedDate) {
         this.taskStartedDate = taskStartedDate;
     }
     public Employee getAssginee() {
@@ -53,10 +53,10 @@ public class Task {
     public void setAssginee(Employee assginee) {
         this.assginee = assginee;
     }
-    public LocalDateTime getTaskDueDate() {
+    public LocalDate getTaskDueDate() {
         return taskDueDate;
     }
-    public void setTaskDueDate(LocalDateTime taskDueDate) {
+    public void setTaskDueDate(LocalDate taskDueDate) {
         this.taskDueDate = taskDueDate;
     }
     @Override

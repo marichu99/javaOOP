@@ -1,6 +1,7 @@
 package com.mabera.manager;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import com.mabera.employee.Employee;
@@ -16,16 +17,20 @@ public class Manager extends Employee implements ManagerInterface{
     }
     @Override
     public Task createTask(Employee employee) {
+        // set up a date time formatter
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         // TODO Auto-generated method stub
-        System.out.println("************************************");
-        System.out.print("Enter the task ID ");
+        System.out.println("*************************************************");
+        System.out.println("Welcome to the task assignment platform");
+        System.out.print("Enter the task ID: ");
         int taskID = myScanner.nextInt();
+        myScanner.nextLine();
         System.out.print("Enter the task description: ");
         String taskDescription = myScanner.nextLine();
-        System.out.print("Enter the task due date[yyyy/mm/dd]: ");
-        LocalDateTime duedate = LocalDateTime.parse(myScanner.nextLine());
+        System.out.print("Enter the task due date[yyyy-mm-dd]: ");
+        LocalDate duedate = LocalDate.parse(myScanner.nextLine(),formatter);
 
-        Task task = new Task(taskID,taskDescription,false,LocalDateTime.now(),employee,duedate);
+        Task task = new Task(taskID,taskDescription,false,LocalDate.now(),employee,duedate);
 
         System.out.println("************************************");
         System.out.println("You have successfully created a task");

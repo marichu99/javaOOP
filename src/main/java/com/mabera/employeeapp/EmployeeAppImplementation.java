@@ -1,6 +1,6 @@
 package com.mabera.employeeapp;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ import com.mabera.task.Task;
 
 public class EmployeeAppImplementation{
     public  Scanner myScanner = new Scanner(System.in);
-    public  List<Task> thisTasks;
+    public  List<Task> thisTasks = new ArrayList<>();
     public  List<Employee> thisDevelopers = new ArrayList<>();
     public  List<Employee> thisManagers = new ArrayList<>();
     public  List<Employee> thisSupervisors =  new ArrayList<>();
@@ -61,8 +61,9 @@ public class EmployeeAppImplementation{
         System.out.println("1. Create Manager");
         System.out.println("2. Create tasks");
         System.out.println("3. Add Employee");
-        System.out.println("4. Main Menu");
-        System.out.print("Choose an option [1-4] :");
+        System.out.println("4. View Employees");
+        System.out.println("5. Main Menu");
+        System.out.print("Choose an option [1-5] :");
         int chosenInput = myScanner.nextInt();
         myScanner.nextLine();
         managerOperations(chosenInput);
@@ -77,6 +78,8 @@ public class EmployeeAppImplementation{
         }else if(chosenInput ==3){
             addEmployee();
         }else if(chosenInput ==4){
+            showEmployees();
+        }else if(chosenInput ==5){
             showMenu();
         }else{
             System.out.println("");
@@ -85,12 +88,25 @@ public class EmployeeAppImplementation{
             showManager();
         }
     }
+    private void showEmployees() {
+        for(Employee manager :thisManagers){
+            System.out.println(manager.toString());
+        }
+        for(Employee developer :thisDevelopers){
+            System.out.println(developer.toString());
+        }
+        for(Employee supervisor :thisSupervisors){
+            System.out.println(supervisor.toString());
+        }              
+    }
+
     private  void addEmployee() {
         EmployeeInterfaceImpl impl = new EmployeeInterfaceImpl();
         System.out.println("");
-        System.out.println("Kindly enter the rank of the employee you want to create [manager/supervisor/developer]: ");
+        System.out.print("Kindly enter the rank of the employee you want to create [manager/supervisor/developer]: ");
         String rank = myScanner.nextLine();
-        impl.createEmployee(rank);        
+        impl.createEmployee(rank);      
+        showManager();  
     }
 
     private  void createTasks() {
@@ -104,10 +120,12 @@ public class EmployeeAppImplementation{
         System.out.println("");
         
         if(thisDevelopers.size()>0){
+            
             for(Employee developer : thisDevelopers){
                 if(developer.getEmployeeID() == employeeID){
+                    Task task = manager.createTask(developer);
                     // assign the task to this employee
-                    thisTasks.add(manager.createTask(developer));
+                    thisTasks.add(task);
                 }else{
                     System.out.println("This employee does not exist, kindly create one");
                     showDeveloper();
@@ -173,7 +191,7 @@ public class EmployeeAppImplementation{
 
     private  void showDelayedTasks() {
         for(Task task :thisTasks){
-            if(task.getTaskDueDate().isAfter(LocalDateTime.now())){
+            if(task.getTaskDueDate().isAfter(LocalDate.now())){
                 task.toString();
             }
         }
@@ -204,7 +222,7 @@ public class EmployeeAppImplementation{
         System.out.println("1. Create Developer");
         System.out.println("2. Complete Tasks");
         System.out.println("3. View Tasks");
-        System.out.println("3. Main Menu");
+        System.out.println("4. Main Menu");
         System.out.print("Choose an option [1-3]: ");
         int chosenInput = myScanner.nextInt();
         myScanner.nextLine();
